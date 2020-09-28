@@ -10,7 +10,7 @@ resource "aws_kms_alias" "terraform_bootstrap" {
 }
 
 resource "aws_s3_bucket" "terraform_state" {
-  bucket              = "bootstrap-tf-state"
+  bucket              = "review-aggregator-tfstate"
   acceleration_status = "Enabled"
   acl                 = "private"
 
