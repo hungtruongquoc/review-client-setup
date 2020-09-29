@@ -1,15 +1,15 @@
-resource "aws_kms_key" "terraform_bootstrap" {
+resource "aws_kms_key" "terraform-bootstrap" {
   description             = "Terraform KMS key"
   deletion_window_in_days = 14
 }
 
-resource "aws_kms_alias" "terraform_bootstrap" {
+resource "aws_kms_alias" "terraform-bootstrap" {
   name          = "alias/bootstrap"
-  target_key_id = aws_kms_key.terraform_bootstrap.key_id
-  depends_on    = [aws_kms_key.terraform_bootstrap]
+  target_key_id = aws_kms_key.terraform-bootstrap.key_id
+  depends_on    = [aws_kms_key.terraform-bootstrap]
 }
 
-resource "aws_s3_bucket" "terraform_state" {
+resource "aws_s3_bucket" "terraform-state" {
   bucket              = "review-aggregator-tfstate"
   acceleration_status = "Enabled"
   acl                 = "private"
@@ -17,7 +17,7 @@ resource "aws_s3_bucket" "terraform_state" {
   server_side_encryption_configuration {
     rule {
       apply_server_side_encryption_by_default {
-        kms_master_key_id = aws_kms_key.terraform_bootstrap.arn
+        kms_master_key_id = aws_kms_key.terraform-bootstrap.arn
         sse_algorithm     = "aws:kms"
       }
     }
@@ -32,11 +32,11 @@ resource "aws_s3_bucket" "terraform_state" {
     Description = "Managed by Terraform"
   }
 
-  depends_on = [aws_kms_key.terraform_bootstrap, aws_kms_alias.terraform_bootstrap]
+  depends_on = [aws_kms_key.terraform-bootstrap, aws_kms_alias.terraform-bootstrap]
 }
 
-resource "aws_dynamodb_table" "bootstrap_state_table" {
-  name           = "bootstrap-tf-lock"
+resource "aws_dynamodb_table" "bootstrap-state-table" {
+  name           = "review-aggregator-tf-lock"
   hash_key       = "LockID"
   read_capacity  = 3
   write_capacity = 3
@@ -51,7 +51,7 @@ resource "aws_dynamodb_table" "bootstrap_state_table" {
     type = "S"
   }
 
-  depends_on = [aws_s3_bucket.terraform_state]
+  depends_on = [aws_s3_bucket.terraform-state]
 }
 
 # We will create ECR repo later 
