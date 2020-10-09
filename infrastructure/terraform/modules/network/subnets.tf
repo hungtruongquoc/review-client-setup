@@ -6,7 +6,7 @@ module "subnet-tags" {
   owner       = var.owner
 
   tags = {
-    Description = "manage by terraform",
+    Description = "managed by terraform",
   }
 }
 resource "aws_subnet" "public" {
@@ -29,7 +29,7 @@ resource "aws_subnet" "private" {
   vpc_id   = aws_vpc.reviewAggregator.id
   #cidr_block              = lookup(var.public_subnet_numbers, 0)
   cidr_block              = each.value
-  map_public_ip_on_launch = "true" //it makes this a public subnet
+  map_public_ip_on_launch = "false"
   availability_zone       = var.availability-zones[each.key]
 
   tags                    = merge(
