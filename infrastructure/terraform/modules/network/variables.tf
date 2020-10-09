@@ -16,16 +16,12 @@ variable "private-subnet-numbers" {
   type = map(string)
 }
 
+variable "project" {}
+
+variable "environment" {}
+
+variable "owner" {}
+
 variable "tags" {}
 
 variable "vpc-cidr-block" {}
-
-variable "db-egress-cidr" {}
-
-variable "db-ingress-cidr" {}
-
-variable "bastion-egress-cidr" {}
-
-variable "bastion-ingress-ssh-cidr" {}
-
-variable "bastion-ingress-db-cidr" {}

@@ -1,3 +1,14 @@
+module "subnet-tags" {
+  source = "../tags"
+
+  project     = var.project
+  environment = var.environment
+  owner       = var.owner
+
+  tags = {
+    Description = "manage by terraform",
+  }
+}
 resource "aws_subnet" "public" {
   for_each                = var.public-subnet-numbers
   vpc_id                  = aws_vpc.reviewAggregator.id
@@ -5,7 +16,12 @@ resource "aws_subnet" "public" {
   map_public_ip_on_launch = "true" //it makes this a public subnet
   availability_zone       = var.availability-zones[each.key]
 
-  tags = var.tags
+  tags                    = merge(
+    module.subnet-tags.tags,
+    {
+      Name = "${var.project}-public-${each.key}"
+    }
+  )
 }
 
 resource "aws_subnet" "private" {
@@ -16,12 +32,17 @@ resource "aws_subnet" "private" {
   map_public_ip_on_launch = "true" //it makes this a public subnet
   availability_zone       = var.availability-zones[each.key]
 
-  tags = var.tags
+  tags                    = merge(
+    module.subnet-tags.tags,
+    {
+      Name = "${var.project}-private-${each.key}"
+    }
+  )
 }
 
 resource "aws_db_subnet_group" "private-subnet-1" {
-  name       = "private-subnet"
-  subnet_ids = [aws_subnet.private[0].id, aws_subnet.private[1].id]
+  name                    = "private-subnet"
+  subnet_ids              = [aws_subnet.private[0].id, aws_subnet.private[1].id]
 
-  tags = var.tags
+  tags                    = module.subnet-tags.tags
 }
