@@ -3,17 +3,13 @@ variable "aws-region" {
   default     = "us-east-2"
 }
 
+variable "project-name" {}
+
+variable "environment" {}
+
+variable "owner" {}
+
 variable "vpc-cidr-block" {}
-
-variable "db-egress-cidr" {}
-
-variable "db-ingress-cidr" {}
-
-variable "bastion-egress-cidr" {}
-
-variable "bastion-ingress-ssh-cidr" {}
-
-variable "bastion-ingress-db-cidr" {}
 
 variable "public-subnet-numbers" {}
 
