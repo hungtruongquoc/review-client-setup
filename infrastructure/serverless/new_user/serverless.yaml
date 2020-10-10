@@ -1,0 +1,28 @@
+service: newUserhandler
+
+provider:
+  name: aws
+  runtime: python3.8
+  stage: dev
+  region: us-east-2
+  profile: review-aggregator
+  memorySize: 128
+
+plugins:
+  - serverless-wsgi
+  - serverless-python-requirements
+custom:
+  wsgi:
+    app: app.app
+    packRequirements: false
+functions:
+  app:
+    handler: wsgi_handler.handler
+    timeout: 10
+    events:
+    - http: 
+        path: /health
+        method: GET
+    - http:
+        path: /register
+        method: POST
