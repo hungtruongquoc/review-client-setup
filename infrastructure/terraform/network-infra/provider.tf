@@ -6,7 +6,7 @@ provider aws {
 terraform {
   backend "s3" {
     bucket          = "review-aggregator-tfstate"
-    key             = "network-infra/terraform.tfstate"
+    key             = "network-infra/terraform_0.12.29.tfstate"
     region          = "us-east-2"
     dynamodb_table  = "review-aggregator-tf-lock"
     profile         = "review-aggregator"
@@ -16,5 +16,5 @@ terraform {
 }
 
 terraform {
-  required_version = "0.13.3"
+  required_version = "~> 0.12.0"
 }
