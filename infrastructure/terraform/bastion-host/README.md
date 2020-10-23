@@ -1,0 +1,1 @@
+Currently, we must use terraform `0.12.29` to deploy this component
