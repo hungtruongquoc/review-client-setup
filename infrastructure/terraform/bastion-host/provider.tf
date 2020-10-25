@@ -25,14 +25,6 @@ data "terraform_remote_state" "network" {
   }
 }
 
-# data "terraform_remote_state" "network" {
-#   backend = "local"
-
-#   config = {
-#     path = "../network-infra/network.tfstate"
-#   }
-# }
-
 terraform {
   required_version = "~> 0.12.0"
 }
