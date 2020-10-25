@@ -2,6 +2,13 @@
 
 ### First, make sure you already setup "review-aggregator" aws profile
 
+## Install SOPS
+On Mac 
+`brew install sops`
+
+Install from binary 
+`https://github.com/mozilla/sops`
+
 ## Encryption
 Run `./sops.sh -e your_crediential.file > encrypted.file`
 
