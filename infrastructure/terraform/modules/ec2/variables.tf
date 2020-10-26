@@ -11,18 +11,18 @@ variable "stage" {
 }
 
 variable "iam-role-default-name" {
-  type        = string
-  default     = ""
+  type    = string
+  default = ""
 }
 
 variable "iam-instance-profile-name" {
-  type        = string
-  default     = ""
+  type    = string
+  default = ""
 }
 
 variable "eni-name" {
-  type        = string
-  default     = ""
+  type    = string
+  default = ""
 }
 
 variable "project" {

@@ -2,7 +2,7 @@ resource "aws_kms_key" "terraform-bootstrap" {
   description             = "Terraform KMS key"
   deletion_window_in_days = 14
 
-  policy                  = data.aws_iam_policy_document.kms_use.json
+  policy = data.aws_iam_policy_document.kms_use.json
 }
 
 resource "aws_kms_alias" "terraform-bootstrap" {

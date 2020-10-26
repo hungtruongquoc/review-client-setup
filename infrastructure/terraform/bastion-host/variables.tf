@@ -10,7 +10,7 @@ variable "environment" {}
 variable "owner" {}
 
 variable "instance-type" {
-    default = "t2.micro"
+  default = "t2.micro"
 }
 
 variable "iam-role-default-name" {}

@@ -131,7 +131,7 @@ resource "aws_instance" "default" {
     delete_on_termination = var.delete-on-termination
   }
 
-  tags              = module.ec2-instance-tags.tags
+  tags = module.ec2-instance-tags.tags
 }
 
 ##

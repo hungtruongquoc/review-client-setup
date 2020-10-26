@@ -16,12 +16,12 @@ module "review-aggregator-network" {
 
   vpc-cidr-block = var.vpc-cidr-block
 
-  public-subnet-numbers    = var.public-subnet-numbers
-  private-subnet-numbers   = var.private-subnet-numbers
+  public-subnet-numbers  = var.public-subnet-numbers
+  private-subnet-numbers = var.private-subnet-numbers
 
-  project                   = var.project-name
-  environment               = var.environment
-  owner                     = var.owner
+  project     = var.project-name
+  environment = var.environment
+  owner       = var.owner
 
   tags = module.review-aggregator-network-label.tags
 }
