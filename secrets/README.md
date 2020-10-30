@@ -33,15 +33,15 @@ The example command is:
 
 ```ssh -i prod-bastion-host.pem -N -L 9001:review-aggregator-prod-review-aggregator-db.crylpz40mxp9.us-east-2.rds.amazonaws.com:5432 ubuntu@ec2-3-138-141-147.us-east-2.compute.amazonaws.com```
 
-`prod-bastion-host.pem` is the private key to create SSH Tunnel
+- `prod-bastion-host.pem` is the private key to create SSH Tunnel
 
-`9001` is your local port
+- `9001` is your local port
 
-`review-aggregator-prod-review-aggregator-db.crylpz40mxp9.us-east-2.rds.amazonaws.com` this is the RDS endpoint, it's in private subnet, cannot be connected from the internet
+- `review-aggregator-prod-review-aggregator-db.crylpz40mxp9.us-east-2.rds.amazonaws.com` this is the RDS endpoint, it's in private subnet, cannot be connected from the internet
 
-`5432` is the RDS port
+- `5432` is the RDS port
 
-`ubuntu@ec2-3-138-141-147.us-east-2.compute.amazonaws.com` is username and endpoint of Bastion host, it's actually the EC2 machine.
+- `ubuntu@ec2-3-138-141-147.us-east-2.compute.amazonaws.com` is username and endpoint of Bastion host, it's actually the EC2 machine.
 
 After create SSH Tunnel, you can use Database client software like MySQL Workbench, SQLectron, .... to connect to the database.
 
