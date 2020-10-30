@@ -45,10 +45,10 @@ The example command is:
 
 After create SSH Tunnel, you can use Database client software like MySQL Workbench, SQLectron, .... to connect to the database.
 
-### Find your EC2 instance ID 
+### Find your EC2 instance basic informations
 Run this aws command, remember correct the `profile` and `region`
 
-```aws ec2 --profile review-aggregator --region us-east-2 describe-instances --query 'Reservations[*].Instances[*].{Name:KeyName,ID:InstanceId}'```
+```aws ec2 --profile review-aggregator --region us-east-2 describe-instances --query 'Reservations[*].Instances[*].{Name:KeyName,ID:InstanceId,IPpublic:PublicIpAddress,DNS:PublicDnsName}'```
 
 You will get data like this, all ec2 instances in that region.
 
@@ -57,7 +57,9 @@ You will get data like this, all ec2 instances in that region.
     [
         {
             "Name": "prod-bastion-host",
-            "ID": "i-016fe749910e1bf83"
+            "ID": "i-016fe749910e1bf83",
+            "IPpublic": "3.138.141.147",
+            "DNS": "ec2-3-138-141-147.us-east-2.compute.amazonaws.com"
         }
     ]
 ]
