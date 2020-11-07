@@ -23,9 +23,9 @@ output "private-subnet-0" {
 }
 
 output "private-subnet-1" {
-  value = "${module.review-aggregator-network.public-subnet-1}"
+  value = "${module.review-aggregator-network.private-subnet-1}"
 }
 
 output "private-subnet-2" {
-  value = "${module.review-aggregator-network.public-subnet-2}"
+  value = "${module.review-aggregator-network.private-subnet-2}"
 }

@@ -7,7 +7,7 @@ module "review-aggregator-network-label" {
   owner       = "review-aggregator"
 
   tags = {
-    Description = "managed by terraform",
+    Description = "managed by Terraform",
   }
 }
 
