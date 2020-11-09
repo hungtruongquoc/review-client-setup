@@ -1,0 +1,11 @@
+sops:
+  kms:
+  - arn: &key "arn:aws:kms:us-east-2:723567309652:key/6ef8c1af-2577-4827-8997-c52ee72af6d4"
+    aws_profile: review-aggregator
+
+creation_rules:
+- path_regex: ./secrets/
+  kms: *key
+
+- path_regex: .*tfstate
+  kms: *key

@@ -29,3 +29,7 @@ output "private-subnet-1" {
 output "private-subnet-2" {
   value = "${aws_subnet.private[2]}"
 }
+
+output "route-table" {
+  value = "${aws_route_table.prod-public-crt.id}"
+}

@@ -12,8 +12,8 @@ private-subnet-numbers = {
   2 = "10.0.80.0/20"
 }
 
-project-name  = "review-aggregator"
+project-name = "review-aggregator"
 
-environment   = "prod"
+environment = "prod"
 
-owner         = "review-aggregator"
+owner = "review-aggregator"

@@ -7,7 +7,7 @@ module "review-aggregator-network-label" {
   owner       = "review-aggregator"
 
   tags = {
-    Description = "managed by terraform",
+    Description = "managed by Terraform",
   }
 }
 
@@ -16,12 +16,15 @@ module "review-aggregator-network" {
 
   vpc-cidr-block = var.vpc-cidr-block
 
-  public-subnet-numbers    = var.public-subnet-numbers
-  private-subnet-numbers   = var.private-subnet-numbers
+  vpc-endpoint-s3-enable = false
+  nat-gw-enable          = true
 
-  project                   = var.project-name
-  environment               = var.environment
-  owner                     = var.owner
+  public-subnet-numbers  = var.public-subnet-numbers
+  private-subnet-numbers = var.private-subnet-numbers
+
+  project     = var.project-name
+  environment = var.environment
+  owner       = var.owner
 
   tags = module.review-aggregator-network-label.tags
 }

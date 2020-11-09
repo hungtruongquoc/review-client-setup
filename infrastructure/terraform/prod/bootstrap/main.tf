@@ -1,12 +1,58 @@
 resource "aws_kms_key" "terraform-bootstrap" {
   description             = "Terraform KMS key"
   deletion_window_in_days = 14
+
+  policy = data.aws_iam_policy_document.kms_use.json
 }
 
 resource "aws_kms_alias" "terraform-bootstrap" {
   name          = "alias/bootstrap"
   target_key_id = aws_kms_key.terraform-bootstrap.key_id
   depends_on    = [aws_kms_key.terraform-bootstrap]
+}
+
+data "aws_iam_policy_document" "kms_use" {
+  statement {
+    sid       = "Enable IAM User Permissions"
+    effect    = "Allow"
+    resources = ["*"]
+    actions   = ["kms:*"]
+
+    principals {
+      type        = "AWS"
+      identifiers = ["arn:aws:iam::723567309652:root"]
+    }
+  }
+
+  statement {
+    sid       = "Enable IAM User Permissions for review-aggregator"
+    effect    = "Allow"
+    resources = ["*"]
+
+    actions = [
+      "kms:Create*",
+      "kms:Encrypt",
+      "kms:Decrypt",
+      "kms:Describe*",
+      "kms:Enable*",
+      "kms:List*",
+      "kms:Put*",
+      "kms:Update*",
+      "kms:Revoke*",
+      "kms:Disable*",
+      "kms:Get*",
+      "kms:Delete*",
+      "kms:TagResource",
+      "kms:UntagResource",
+      "kms:ScheduleKeyDeletion",
+      "kms:CancelKeyDeletion",
+    ]
+
+    principals {
+      type        = "AWS"
+      identifiers = ["arn:aws:iam::723567309652:user/reviewAggregator"]
+    }
+  }
 }
 
 resource "aws_s3_bucket" "terraform-state" {
