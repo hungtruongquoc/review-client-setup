@@ -64,3 +64,20 @@ You will get data like this, all ec2 instances in that region.
     ]
 ]
 ```
+
+Run command below to get RDS Endpoint
+
+```aws rds --profile review-aggregator --region us-east-2 describe-db-instances --query 'DBInstances[?DBInstanceIdentifier==`review-aggregator-prod-review-aggregator-db`].[Endpoint]'```
+
+The result look like this
+```
+[
+    [
+        {
+            "Address": "review-aggregator-prod-review-aggregator-db.crylpz40mxp9.us-east-2.rds.amazonaws.com",
+            "Port": 5432,
+            "HostedZoneId": "Z2XHWR1WZ565X2"
+        }
+    ]
+]
+```
