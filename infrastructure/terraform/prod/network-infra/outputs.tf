@@ -29,3 +29,7 @@ output "private-subnet-1" {
 output "private-subnet-2" {
   value = "${module.review-aggregator-network.private-subnet-2}"
 }
+
+output "route-table" {
+  value = "${module.review-aggregator-network.route-table}"
+}

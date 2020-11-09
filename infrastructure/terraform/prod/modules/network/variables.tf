@@ -16,6 +16,10 @@ variable "private-subnet-numbers" {
   type = map(string)
 }
 
+variable "nat-gw-enable" {}
+
+variable "vpc-endpoint-s3-enable" {}
+
 variable "project" {}
 
 variable "environment" {}

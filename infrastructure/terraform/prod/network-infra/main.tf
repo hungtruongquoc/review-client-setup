@@ -16,6 +16,9 @@ module "review-aggregator-network" {
 
   vpc-cidr-block = var.vpc-cidr-block
 
+  vpc-endpoint-s3-enable = false
+  nat-gw-enable          = true
+
   public-subnet-numbers  = var.public-subnet-numbers
   private-subnet-numbers = var.private-subnet-numbers
 
