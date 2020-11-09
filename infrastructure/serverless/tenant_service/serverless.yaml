@@ -1,0 +1,41 @@
+service: tenantService
+
+provider:
+  name: aws
+  vpc:
+    securityGroupIds:
+      - sg-0cea395dacf024c0c
+    subnetIds:
+      - subnet-042ece8041543aa3f
+      - subnet-079d6f430e6094b70
+  iamRoleStatements:
+    - Effect: 'Allow'
+      Action:
+        - 'ec2:CreateNetworkInterface'
+        - 'ec2:DescribeNetworkInterfaces'
+        - 'ec2:DeleteNetworkInterface'
+      Resource:
+        - '*'
+    - Effect: 'Allow'
+      Action:
+        - 'rds:DescribeDBInstances'
+      Resource:
+        - 'arn:aws:rds:us-east-2:723567309652:db:review-aggregator-prod-review-aggregator-db'
+    - Effect: 'Allow'
+      Action:
+        - 'ssm:GetParameter'
+      Resource:
+        - 'arn:aws:ssm:us-east-2:723567309652:*'
+        - 'arn:aws:ssm:us-east-2:723567309652:parameter/review-*'
+  runtime: python3.8
+  stage: dev
+  region: us-east-2
+  profile: review-aggregator
+  memorySize: 128
+
+plugins:
+  - serverless-python-requirements
+functions:
+  app:
+    handler: handler.main
+    timeout: 30
