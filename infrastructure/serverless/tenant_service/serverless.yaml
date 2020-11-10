@@ -18,6 +18,13 @@ provider:
         - '*'
     - Effect: 'Allow'
       Action:
+        - 'sqs:DeleteMessage'
+        - 'sqs:ReceiveMessage'
+        - 'sqs:PurgeQueue'
+      Resource:
+        - 'arn:aws:sqs:us-east-2:723567309652:tenant-service-queue'
+    - Effect: 'Allow'
+      Action:
         - 'rds:DescribeDBInstances'
       Resource:
         - 'arn:aws:rds:us-east-2:723567309652:db:review-aggregator-prod-review-aggregator-db'
