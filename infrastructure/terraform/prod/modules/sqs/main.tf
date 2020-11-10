@@ -1,4 +1,4 @@
-module "sqs_tags" {
+module "sqs-tags" {
     source = "../tags"
 
     name        = var.name
@@ -30,7 +30,7 @@ resource "aws_sqs_queue" "this" {
   kms_master_key_id                 = var.kms_master_key_id
   kms_data_key_reuse_period_seconds = var.kms_data_key_reuse_period_seconds
 
-  tags = module.sqs_tags.tags
+  tags = module.sqs-tags.tags
 }
 
 data "aws_arn" "this" {
