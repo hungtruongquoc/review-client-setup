@@ -5,17 +5,13 @@ import logging
 import time
 from botocore.exceptions import ClientError
 
-
 app = flask.Flask(__name__)
 
 class register():
-    def __init__(self,client_name,region=None):
+    def __init__(self,client_name,region="us-east-2"):
         self.client_name = client_name
         self.region = region
-        self.sqs_url = ""
         try:
-            if self.region is None:
-                self.region = "us-east-2"
             self.s3_client = boto3.client('s3', region_name=self.region)
             self.sqs_client = boto3.client("sqs")
         except ClientError as e:
@@ -70,6 +66,7 @@ class register():
         except ClientError as e:
             logging.error(e)
             return False
+
 
 @app.route("/health")
 def health_check():
