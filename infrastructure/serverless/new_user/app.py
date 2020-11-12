@@ -33,7 +33,7 @@ class register():
     def get_sqs_url(self):
         try:
             response = self.sqs_client.get_queue_url(
-                QueueName='tenant-service-queue',
+                QueueName='TenantDbCreateQueue',
                 QueueOwnerAWSAccountId='723567309652'
             )
             return str(response['QueueUrl'])

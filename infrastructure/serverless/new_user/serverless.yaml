@@ -18,6 +18,7 @@ provider:
         - 'sqs:SendMessageBatch'
       Resource:
         - 'arn:aws:sqs:us-east-2:723567309652:tenant-service-queue'
+        - 'arn:aws:sqs:us-east-2:723567309652:TenantDbCreateQueue'
     - Effect: 'Allow'
       Action:
         - 'cloudfront:CreateDistribution'
