@@ -2,6 +2,33 @@ service: newUserhandler
 
 provider:
   name: aws
+  iamRoleStatements:
+    - Effect: 'Allow'
+      Action:
+        - 's3:ListBucket'
+        - 's3:CreateBucket'
+      Resource:
+        - 'arn:aws:s3:::*'
+    - Effect: 'Allow'
+      Action:
+        - 'sqs:GetQueueUrl'
+        - 'sqs:CreateQueue'
+        - 'sqs:DeleteMessage'
+        - 'sqs:SendMessage'
+        - 'sqs:SendMessageBatch'
+      Resource:
+        - 'arn:aws:sqs:us-east-2:723567309652:tenant-service-queue'
+    - Effect: 'Allow'
+      Action:
+        - 'cloudfront:CreateDistribution'
+      Resource:
+        - 'arn:aws:cloudfront::723567309652:distribution/*'
+    - Effect: 'Allow'
+      Action:
+        - 'ssm:GetParameter'
+      Resource:
+        - 'arn:aws:ssm:us-east-2:723567309652:*'
+        - 'arn:aws:ssm:us-east-2:723567309652:parameter/review-*'
   runtime: python3.8
   stage: dev
   region: us-east-2
@@ -18,7 +45,7 @@ custom:
 functions:
   app:
     handler: wsgi_handler.handler
-    timeout: 10
+    timeout: 30
     events:
     - http: 
         path: /health

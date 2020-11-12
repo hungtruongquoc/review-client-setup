@@ -18,6 +18,7 @@ provider:
         - '*'
     - Effect: 'Allow'
       Action:
+        - 'sqs:GetQueueUrl'
         - 'sqs:DeleteMessage'
         - 'sqs:ReceiveMessage'
         - 'sqs:PurgeQueue'
