@@ -7,25 +7,25 @@ module "tenant-service-queue" {
   content_based_deduplication = false // Only for FIFO queue
   visibility_timeout_seconds = 30
 
-  policy = <<POLICY
-{
-  "Version": "2012-10-17",
-  "Id": "sqspolicy",
-  "Statement": [
-    {
-      "Sid": "ForBuildInfraLambda",
-      "Effect": "Allow",
-      "Principal": {
-        "Service": "lambda.amazonaws.com"
-      },
-      "Action": "sqs:SendMessage",
-      "Resource": "arn:aws:sqs:us-east-2:723567309652:tenant-service-queue"
-    }
-  ]
-}
-POLICY
+#   policy = <<POLICY
+# {
+#   "Version": "2012-10-17",
+#   "Id": "sqspolicy",
+#   "Statement": [
+#     {
+#       "Sid": "ForBuildInfraLambda",
+#       "Effect": "Allow",
+#       "Principal": {
+#         "Service": "lambda.amazonaws.com"
+#       },
+#       "Action": "sqs:SendMessage",
+#       "Resource": "arn:aws:sqs:us-east-2:723567309652:tenant-service-queue"
+#     }
+#   ]
+# }
+# POLICY
 
-  name = "tenant-service-queue"
+  name = "TenantDbCreateQueue"
   project = "review-aggregator"
   environment = "prod"
   owner = "review-aggregator" 
