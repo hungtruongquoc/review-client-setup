@@ -44,21 +44,9 @@ provider:
 plugins:
   - serverless-python-requirements
 
-resources:
-  Resources:
-    TenantDbCreateQueue:
-      Type: "AWS::SQS::Queue"
-      Properties:
-        QueueName: "TenantDbCreateQueue"
-
 functions:
   app:
     handler: handler.main
     timeout: 30
     events:
-      - sqs:
-          batchSize: 1
-          arn:
-            Fn::GetAtt:
-              - TenantDbCreateQueue
-              - Arn
+      - sqs: arn:aws:sqs:us-east-2:723567309652:TenantDbCreateQueue
