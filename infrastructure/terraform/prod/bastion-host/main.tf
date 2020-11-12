@@ -5,7 +5,7 @@ module "bastion-host" {
   ami-owner                     = "099720109477" // Amazon is the owner
   region                        = "us-east-2"
   instance-type                 = var.instance-type
-  ebs-volume-size               = 10
+  root-volume-size               = 10
   vpc-id                        = data.terraform_remote_state.network.outputs.review-aggregator-vpc.id
   security-group-name           = var.security-group-name
   ebs-volume-count              = 0 // increase this value if you want to add more disk
