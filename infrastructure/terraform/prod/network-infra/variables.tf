@@ -3,6 +3,8 @@ variable "aws-region" {
   default     = "us-east-2"
 }
 
+variable "name" {}
+
 variable "project-name" {}
 
 variable "environment" {}

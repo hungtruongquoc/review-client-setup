@@ -12,6 +12,8 @@ private-subnet-numbers = {
   2 = "10.0.80.0/20"
 }
 
+name  = "main-network"
+
 project-name = "review-aggregator"
 
 environment = "prod"

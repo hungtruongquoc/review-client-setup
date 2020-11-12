@@ -22,6 +22,7 @@ module "review-aggregator-network" {
   public-subnet-numbers  = var.public-subnet-numbers
   private-subnet-numbers = var.private-subnet-numbers
 
+  name        = var.name
   project     = var.project-name
   environment = var.environment
   owner       = var.owner

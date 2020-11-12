@@ -1,12 +1,12 @@
 module "rds_instance" {
   source = "../modules/rds"
-  name   = "review-aggregator-db"
+  name   = "tenant-db"
   #dns_zone_id                 = "Z89FN1IW975KPE"  // Currently we don't need to public our DB
-  host_name = "review-aggregator-db"
+  host_name = "tenant-db"
   #security_group_ids          = [aws_security_group.rds-review-aggregator.id] // Let's Terraform create default security group for this rds
   ca_cert_identifier   = "rds-ca-2019"
   allowed_cidr_blocks  = ["0.0.0.0/0"]
-  database_name        = "review_aggregator"
+  database_name        = "tenant_db"
   database_user        = "root"
   database_password    = random_password.review-aggregator-db.result
   database_port        = 5432
@@ -19,7 +19,7 @@ module "rds_instance" {
   major_engine_version = "10"
   instance_class       = "db.t2.micro"
   db_parameter_group   = "postgres10"
-  #option_group_name           = "mysql-options" // Currently we don't have option group for our rds
+  #option_group_name           = "mysql-options" // Let's Terraform create it automatically
   publicly_accessible = false
   subnet_ids          = [data.terraform_remote_state.network.outputs.private-subnet-0.id, data.terraform_remote_state.network.outputs.private-subnet-1.id]
   vpc_id              = data.terraform_remote_state.network.outputs.review-aggregator-vpc.id

@@ -2,9 +2,9 @@ module "lambda-new-user-handler-tags" {
   source = "../tags"
 
   name        = "new-user-handler-VPC-endpoint"
-  project     = "review-aggregator"
-  environment = "prod"
-  owner       = "review-aggregator"
+  project     = var.project
+  environment = var.environment
+  owner       = var.owner
 
   tags = {
     Description = "managed by Terraform"
@@ -15,9 +15,9 @@ module "lambda-nat-gw-tags" {
   source = "../tags"
 
   name        = "new-user-handler-nat-gw"
-  project     = "review-aggregator"
-  environment = "prod"
-  owner       = "review-aggregator"
+  project     = var.project
+  environment = var.environment
+  owner       = var.owner
 
   tags = {
     Description = "managed by Terraform"
@@ -28,9 +28,9 @@ module "lambda-eip-tags" {
   source = "../tags"
 
   name        = "new-user-handler-nat-gw-eip"
-  project     = "review-aggregator"
-  environment = "prod"
-  owner       = "review-aggregator"
+  project     = var.project
+  environment = var.environment
+  owner       = var.owner
 
   tags = {
     Description = "managed by Terraform"
@@ -56,7 +56,7 @@ resource "aws_route_table" "prod-public-crt" {
   tags = merge(
     var.tags,
     {
-      Name = "review-aggregator-public-crt"
+      Name = "${var.name}-public-crt"
     }
   )
 }
@@ -72,7 +72,7 @@ resource "aws_route_table" "prod-private-crt" {
   tags = merge(
     var.tags,
     {
-      Name = "review-aggregator-private-crt"
+      Name = "${var.name}-private-crt"
     }
   )
 }

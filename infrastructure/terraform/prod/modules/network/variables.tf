@@ -20,6 +20,8 @@ variable "nat-gw-enable" {}
 
 variable "vpc-endpoint-s3-enable" {}
 
+variable "name" {}
+
 variable "project" {}
 
 variable "environment" {}

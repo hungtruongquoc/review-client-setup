@@ -4,3 +4,7 @@ node_modules
 **.pem
 **.tfstate
 **.tfstate.backup
+.serverless
+node_modules
+.idea
+.DS_Store

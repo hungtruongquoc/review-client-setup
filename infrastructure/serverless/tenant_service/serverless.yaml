@@ -1,29 +1,34 @@
-service: newUserhandler
+service: tenantService
 
 provider:
   name: aws
+  vpc:
+    securityGroupIds:
+      - sg-0cea395dacf024c0c
+    subnetIds:
+      - subnet-042ece8041543aa3f
+      - subnet-079d6f430e6094b70
   iamRoleStatements:
     - Effect: 'Allow'
       Action:
-        - 's3:ListBucket'
-        - 's3:CreateBucket'
+        - 'ec2:CreateNetworkInterface'
+        - 'ec2:DescribeNetworkInterfaces'
+        - 'ec2:DeleteNetworkInterface'
       Resource:
-        - 'arn:aws:s3:::*'
+        - '*'
     - Effect: 'Allow'
       Action:
         - 'sqs:GetQueueUrl'
-        - 'sqs:CreateQueue'
         - 'sqs:DeleteMessage'
-        - 'sqs:SendMessage'
-        - 'sqs:SendMessageBatch'
+        - 'sqs:ReceiveMessage'
+        - 'sqs:PurgeQueue'
       Resource:
         - 'arn:aws:sqs:us-east-2:723567309652:tenant-service-queue'
-        - 'arn:aws:sqs:us-east-2:723567309652:TenantDbCreateQueue'
     - Effect: 'Allow'
       Action:
-        - 'cloudfront:CreateDistribution'
+        - 'rds:DescribeDBInstances'
       Resource:
-        - 'arn:aws:cloudfront::723567309652:distribution/*'
+        - 'arn:aws:rds:us-east-2:723567309652:db:review-aggregator-prod-review-aggregator-db'
     - Effect: 'Allow'
       Action:
         - 'ssm:GetParameter'
@@ -37,20 +42,11 @@ provider:
   memorySize: 128
 
 plugins:
-  - serverless-wsgi
   - serverless-python-requirements
-custom:
-  wsgi:
-    app: app.app
-    packRequirements: false
+
 functions:
   app:
-    handler: wsgi_handler.handler
+    handler: handler.main
     timeout: 30
     events:
-    - http: 
-        path: /health
-        method: GET
-    - http:
-        path: /register
-        method: POST
+      - sqs: arn:aws:sqs:us-east-2:723567309652:TenantDbCreateQueue
