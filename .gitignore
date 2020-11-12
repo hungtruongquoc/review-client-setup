@@ -1,12 +1,10 @@
 .terraform
 __pycache__
-<<<<<<< Updated upstream
 node_modules
 **.pem
 **.tfstate
 **.tfstate.backup
-=======
 .serverless
 node_modules
 .idea
->>>>>>> Stashed changes
+.DS_Store
